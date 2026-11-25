@@ -1,0 +1,14 @@
+# data restored by the workflow (cache or data/seed), never committed
+engine/*.db
+engine/dbs/
+engine/runner/tmp/
+engine/runner/lines.csv
+engine/runner/lines_example.csv
+engine/runner/top10_*.csv
+engine/odds/.oddspapi_key
+engine/odds/live_today.json
+engine/odds/hist/
+**/__pycache__/
+web/node_modules/
+web/.next/
+.vercel

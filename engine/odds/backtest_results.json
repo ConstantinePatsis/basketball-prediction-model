@@ -1,0 +1,241 @@
+{
+ "lines graded": 6438,
+ "games": 129,
+ "share of lines that went over": 0.472,
+ "accuracy (Brier, lower=better)": {
+  "model": 0.2472,
+  "Stoiximan at bet time": 0.2506,
+  "Stoiximan at close": 0.2504,
+  "coin flip": 0.25
+ },
+ "log loss": {
+  "model": 0.6953,
+  "Stoiximan": 0.6944
+ },
+ "avg P(over) model / Stoiximan / actual": [
+  0.449,
+  0.506,
+  0.472
+ ],
+ "Brier by stat (model vs Stoiximan)": {
+  "ast": [
+   0.2418,
+   0.2549,
+   774
+  ],
+  "fg3m": [
+   0.2437,
+   0.2434,
+   932
+  ],
+  "pa": [
+   0.2505,
+   0.2501,
+   733
+  ],
+  "pr": [
+   0.2487,
+   0.2507,
+   846
+  ],
+  "pra": [
+   0.2513,
+   0.2496,
+   476
+  ],
+  "pts": [
+   0.2481,
+   0.2506,
+   1272
+  ],
+  "ra": [
+   0.2469,
+   0.2543,
+   504
+  ],
+  "reb": [
+   0.2481,
+   0.2531,
+   901
+  ]
+ },
+ "blend (weight on model fitted on rounds 1-7, tested on later rounds)": {
+  "model weight": 0.55,
+  "Brier blend": 0.2452,
+  "Brier Stoiximan": 0.2503,
+  "Brier model": 0.247
+ },
+ "BETS: model edge >= 5 pts": {
+  "bets": 4218,
+  "win %": 57.7,
+  "break-even win %": 52.9,
+  "profit (units)": 415.2,
+  "ROI %": 9.8,
+  "ROI 95% range %": [
+   6.2,
+   13.9
+  ],
+  "avg CLV (pts)": 0.13,
+  "share of bets where line moved our way": 0.127
+ },
+ "BETS: model edge >= 10 pts": {
+  "bets": 2512,
+  "win %": 59.4,
+  "break-even win %": 52.4,
+  "profit (units)": 359.7,
+  "ROI %": 14.3,
+  "ROI 95% range %": [
+   9.5,
+   19.4
+  ],
+  "avg CLV (pts)": 0.2,
+  "share of bets where line moved our way": 0.131
+ },
+ "edge>=5 by side": {
+  "OVER": {
+   "bets": 997,
+   "win %": 57.5,
+   "break-even win %": 53.3,
+   "profit (units)": 85.5,
+   "ROI %": 8.6,
+   "ROI 95% range %": [
+    1.3,
+    16.1
+   ],
+   "avg CLV (pts)": 0.35,
+   "share of bets where line moved our way": 0.121
+  },
+  "UNDER": {
+   "bets": 3221,
+   "win %": 57.8,
+   "break-even win %": 52.7,
+   "profit (units)": 329.7,
+   "ROI %": 10.2,
+   "ROI 95% range %": [
+    5.5,
+    15.0
+   ],
+   "avg CLV (pts)": 0.07,
+   "share of bets where line moved our way": 0.128
+  }
+ },
+ "edge>=5 by stat": {
+  "ast": {
+   "bets": 555,
+   "win %": 58.7,
+   "break-even win %": 51.3,
+   "profit (units)": 92.7,
+   "ROI %": 16.7,
+   "ROI 95% range %": [
+    8.1,
+    25.8
+   ],
+   "avg CLV (pts)": 0.31,
+   "share of bets where line moved our way": 0.049
+  },
+  "fg3m": {
+   "bets": 659,
+   "win %": 54.9,
+   "break-even win %": 51.3,
+   "profit (units)": 51.8,
+   "ROI %": 7.9,
+   "ROI 95% range %": [
+    0.8,
+    14.9
+   ],
+   "avg CLV (pts)": 0.2,
+   "share of bets where line moved our way": 0.303
+  },
+  "pa": {
+   "bets": 427,
+   "win %": 56.4,
+   "break-even win %": 54.1,
+   "profit (units)": 18.5,
+   "ROI %": 4.3,
+   "ROI 95% range %": [
+    -4.3,
+    12.6
+   ],
+   "avg CLV (pts)": -0.06,
+   "share of bets where line moved our way": 0.033
+  },
+  "pr": {
+   "bets": 561,
+   "win %": 58.6,
+   "break-even win %": 54.1,
+   "profit (units)": 47.9,
+   "ROI %": 8.5,
+   "ROI 95% range %": [
+    1.0,
+    16.8
+   ],
+   "avg CLV (pts)": 0.13,
+   "share of bets where line moved our way": 0.053
+  },
+  "pra": {
+   "bets": 277,
+   "win %": 56.0,
+   "break-even win %": 54.1,
+   "profit (units)": 9.3,
+   "ROI %": 3.4,
+   "ROI 95% range %": [
+    -7.1,
+    14.3
+   ],
+   "avg CLV (pts)": 0.08,
+   "share of bets where line moved our way": 0.047
+  },
+  "pts": {
+   "bets": 718,
+   "win %": 58.9,
+   "break-even win %": 54.0,
+   "profit (units)": 67.4,
+   "ROI %": 9.4,
+   "ROI 95% range %": [
+    3.1,
+    15.9
+   ],
+   "avg CLV (pts)": 0.07,
+   "share of bets where line moved our way": 0.274
+  },
+  "ra": {
+   "bets": 337,
+   "win %": 61.4,
+   "break-even win %": 52.0,
+   "profit (units)": 63.4,
+   "ROI %": 18.8,
+   "ROI 95% range %": [
+    7.7,
+    29.7
+   ],
+   "avg CLV (pts)": -0.11,
+   "share of bets where line moved our way": 0.045
+  },
+  "reb": {
+   "bets": 684,
+   "win %": 57.2,
+   "break-even win %": 52.6,
+   "profit (units)": 64.3,
+   "ROI %": 9.4,
+   "ROI 95% range %": [
+    2.8,
+    16.2
+   ],
+   "avg CLV (pts)": 0.14,
+   "share of bets where line moved our way": 0.056
+  }
+ },
+ "BETS on later rounds using the blend, edge >= 3 pts": {
+  "bets": 1926,
+  "win %": 56.6,
+  "break-even win %": 52.9,
+  "profit (units)": 145.0,
+  "ROI %": 7.5,
+  "ROI 95% range %": [
+   1.7,
+   13.9
+  ],
+  "avg CLV (pts)": 0.14,
+  "share of bets where line moved our way": 0.15
+ }
+}

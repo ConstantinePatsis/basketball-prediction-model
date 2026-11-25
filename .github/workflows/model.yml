@@ -1,0 +1,88 @@
+name: EuroLeague model
+
+on:
+  schedule:
+    - cron: "15 8 * * *"    # 10:15 Athens (winter time): picks
+    - cron: "30 14 * * *"   # 16:30 Athens: refresh picks with updated injury reports
+    - cron: "40 22 * * *"   # 00:40 Athens: grade last night's picks
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "picks or grade"
+        default: picks
+        type: choice
+        options: [picks, grade]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: model
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install Python packages
+        run: pip install -r requirements.txt
+
+      - name: Restore databases (latest cache)
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            engine/euroleague.db
+            engine/basketball.db
+            engine/dbs
+          key: data-${{ github.run_id }}
+          restore-keys: data-
+
+      - name: First run - unpack the starting databases
+        if: steps.cache.outputs.cache-matched-key == ''
+        run: tar -xJf data/seed/data_seed.tar.xz -C engine
+
+      - name: Point /home/claude at the engine (scripts use that path)
+        run: sudo ln -sfn "$GITHUB_WORKSPACE/engine" /home/claude
+
+      - name: Decide mode
+        id: mode
+        run: |
+          MODE="${{ github.event.inputs.mode }}"
+          if [ -z "$MODE" ]; then
+            if [ "${{ github.event.schedule }}" = "40 22 * * *" ]; then MODE=grade; else MODE=picks; fi
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+
+      - name: Run the model
+        env:
+          ODDSPAPI_KEY: ${{ secrets.ODDSPAPI_KEY }}
+        working-directory: engine/runner
+        run: python daily_run.py ${{ steps.mode.outputs.mode }}
+
+      - name: Save databases
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            engine/euroleague.db
+            engine/basketball.db
+            engine/dbs
+          key: data-${{ github.run_id }}
+
+      - name: Commit results (triggers the Vercel rebuild)
+        run: |
+          git config user.name "model-bot"
+          git config user.email "model-bot@users.noreply.github.com"
+          git add web/data engine/runner/*.csv engine/leagues/lkl_index.json || true
+          if git diff --cached --quiet; then echo "nothing new"; exit 0; fi
+          git commit -m "Model run: ${{ steps.mode.outputs.mode }} $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push

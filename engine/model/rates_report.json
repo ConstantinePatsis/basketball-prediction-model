@@ -1,0 +1,258 @@
+{
+  "stat_given_actual_minutes": {
+    "Points": {
+      "MAE model": 3.228,
+      "MAE naive rate x minutes": 3.301
+    },
+    "Rebounds": {
+      "MAE model": 1.307,
+      "MAE naive rate x minutes": 1.333
+    },
+    "Assists": {
+      "MAE model": 1.001,
+      "MAE naive rate x minutes": 1.013
+    },
+    "3-pointers made": {
+      "MAE model": 0.659,
+      "MAE naive rate x minutes": 0.666
+    }
+  },
+  "dispersion_k": {
+    "Points": 8.29,
+    "Rebounds": 97.34,
+    "Assists": 22.07,
+    "3-pointers made": 224.73
+  },
+  "probabilities": {
+    "Points": {
+      "n": 11223,
+      "actual over rate": 0.466,
+      "Brier model (calibrated)": 0.2418,
+      "Brier model (raw)": 0.2429,
+      "Brier naive": 0.2525,
+      "Brier coin-flip": 0.25,
+      "LogLoss model": 0.6793,
+      "LogLoss naive": 0.7106
+    },
+    "Rebounds": {
+      "n": 11223,
+      "actual over rate": 0.469,
+      "Brier model (calibrated)": 0.2364,
+      "Brier model (raw)": 0.236,
+      "Brier naive": 0.2509,
+      "Brier coin-flip": 0.25,
+      "LogLoss model": 0.665,
+      "LogLoss naive": 0.713
+    },
+    "Assists": {
+      "n": 11223,
+      "actual over rate": 0.439,
+      "Brier model (calibrated)": 0.2323,
+      "Brier model (raw)": 0.2315,
+      "Brier naive": 0.2457,
+      "Brier coin-flip": 0.25,
+      "LogLoss model": 0.6568,
+      "LogLoss naive": 0.7078
+    },
+    "3-pointers made": {
+      "n": 11223,
+      "actual over rate": 0.352,
+      "Brier model (calibrated)": 0.1973,
+      "Brier model (raw)": 0.197,
+      "Brier naive": 0.2036,
+      "Brier coin-flip": 0.25,
+      "LogLoss model": 0.5655,
+      "LogLoss naive": 0.5928
+    }
+  },
+  "calibration": {
+    "Points": [
+      {
+        "bin": "(0.0, 0.3]",
+        "n": 761,
+        "predicted": 0.232,
+        "actual": 0.271
+      },
+      {
+        "bin": "(0.3, 0.4]",
+        "n": 1130,
+        "predicted": 0.333,
+        "actual": 0.357
+      },
+      {
+        "bin": "(0.4, 0.45]",
+        "n": 1509,
+        "predicted": 0.42,
+        "actual": 0.416
+      },
+      {
+        "bin": "(0.45, 0.5]",
+        "n": 3424,
+        "predicted": 0.482,
+        "actual": 0.461
+      },
+      {
+        "bin": "(0.5, 0.55]",
+        "n": 1856,
+        "predicted": 0.524,
+        "actual": 0.517
+      },
+      {
+        "bin": "(0.55, 0.6]",
+        "n": 2301,
+        "predicted": 0.583,
+        "actual": 0.568
+      },
+      {
+        "bin": "(0.6, 0.7]",
+        "n": 171,
+        "predicted": 0.637,
+        "actual": 0.579
+      },
+      {
+        "bin": "(0.7, 1.0]",
+        "n": 71,
+        "predicted": 0.846,
+        "actual": 0.746
+      }
+    ],
+    "Rebounds": [
+      {
+        "bin": "(0.0, 0.3]",
+        "n": 586,
+        "predicted": 0.251,
+        "actual": 0.251
+      },
+      {
+        "bin": "(0.3, 0.4]",
+        "n": 3638,
+        "predicted": 0.378,
+        "actual": 0.374
+      },
+      {
+        "bin": "(0.4, 0.45]",
+        "n": 945,
+        "predicted": 0.42,
+        "actual": 0.442
+      },
+      {
+        "bin": "(0.45, 0.5]",
+        "n": 2427,
+        "predicted": 0.476,
+        "actual": 0.475
+      },
+      {
+        "bin": "(0.5, 0.55]",
+        "n": 1229,
+        "predicted": 0.52,
+        "actual": 0.557
+      },
+      {
+        "bin": "(0.55, 0.6]",
+        "n": 1120,
+        "predicted": 0.568,
+        "actual": 0.569
+      },
+      {
+        "bin": "(0.6, 0.7]",
+        "n": 1024,
+        "predicted": 0.661,
+        "actual": 0.657
+      },
+      {
+        "bin": "(0.7, 1.0]",
+        "n": 254,
+        "predicted": 0.774,
+        "actual": 0.736
+      }
+    ],
+    "Assists": [
+      {
+        "bin": "(0.0, 0.3]",
+        "n": 1516,
+        "predicted": 0.27,
+        "actual": 0.238
+      },
+      {
+        "bin": "(0.3, 0.4]",
+        "n": 2894,
+        "predicted": 0.364,
+        "actual": 0.354
+      },
+      {
+        "bin": "(0.4, 0.45]",
+        "n": 2135,
+        "predicted": 0.426,
+        "actual": 0.441
+      },
+      {
+        "bin": "(0.5, 0.55]",
+        "n": 2735,
+        "predicted": 0.506,
+        "actual": 0.516
+      },
+      {
+        "bin": "(0.55, 0.6]",
+        "n": 186,
+        "predicted": 0.575,
+        "actual": 0.618
+      },
+      {
+        "bin": "(0.6, 0.7]",
+        "n": 1612,
+        "predicted": 0.625,
+        "actual": 0.609
+      },
+      {
+        "bin": "(0.7, 1.0]",
+        "n": 145,
+        "predicted": 0.787,
+        "actual": 0.669
+      }
+    ],
+    "3-pointers made": [
+      {
+        "bin": "(0.0, 0.3]",
+        "n": 3658,
+        "predicted": 0.141,
+        "actual": 0.136
+      },
+      {
+        "bin": "(0.3, 0.4]",
+        "n": 2463,
+        "predicted": 0.372,
+        "actual": 0.369
+      },
+      {
+        "bin": "(0.4, 0.45]",
+        "n": 1436,
+        "predicted": 0.42,
+        "actual": 0.415
+      },
+      {
+        "bin": "(0.45, 0.5]",
+        "n": 1981,
+        "predicted": 0.481,
+        "actual": 0.479
+      },
+      {
+        "bin": "(0.55, 0.6]",
+        "n": 1284,
+        "predicted": 0.57,
+        "actual": 0.576
+      },
+      {
+        "bin": "(0.6, 0.7]",
+        "n": 215,
+        "predicted": 0.607,
+        "actual": 0.642
+      },
+      {
+        "bin": "(0.7, 1.0]",
+        "n": 186,
+        "predicted": 0.757,
+        "actual": 0.629
+      }
+    ]
+  }
+}

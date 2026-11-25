@@ -1,0 +1,94 @@
+{
+  "rows": {
+    "train": 49857,
+    "valid": 7106,
+    "test": 11223
+  },
+  "results": {
+    "valid 2024-25": {
+      "baseline: last-5 average": {
+        "MAE": 4.964,
+        "RMSE": 6.379,
+        "within_3min": 0.386
+      },
+      "baseline: season average": {
+        "MAE": 4.925,
+        "RMSE": 6.294,
+        "within_3min": 0.39
+      },
+      "model without fatigue features": {
+        "MAE": 4.489,
+        "RMSE": 5.721,
+        "within_3min": 0.417
+      },
+      "model with fatigue features": {
+        "MAE": 4.478,
+        "RMSE": 5.702,
+        "within_3min": 0.419
+      }
+    },
+    "test 2025-27": {
+      "baseline: last-5 average": {
+        "MAE": 4.786,
+        "RMSE": 6.186,
+        "within_3min": 0.402
+      },
+      "baseline: season average": {
+        "MAE": 4.724,
+        "RMSE": 6.107,
+        "within_3min": 0.405
+      },
+      "model without fatigue features": {
+        "MAE": 4.364,
+        "RMSE": 5.571,
+        "within_3min": 0.426
+      },
+      "model with fatigue features": {
+        "MAE": 4.343,
+        "RMSE": 5.543,
+        "within_3min": 0.43
+      }
+    }
+  },
+  "segments_test": {
+    "players with domestic data": {
+      "n": 9981,
+      "MAE without fatigue": 4.324,
+      "MAE with fatigue": 4.3
+    },
+    "rest <= 3 days since last game (any comp)": {
+      "n": 5499,
+      "MAE without fatigue": 4.324,
+      "MAE with fatigue": 4.297
+    },
+    "2+ games in previous 7 days": {
+      "n": 6249,
+      "MAE without fatigue": 4.258,
+      "MAE with fatigue": 4.233
+    },
+    "first 5 EuroLeague games of season": {
+      "n": 2796,
+      "MAE without fatigue": 4.559,
+      "MAE with fatigue": 4.518
+    }
+  },
+  "interval_10_90_coverage_test": 0.811,
+  "avg_interval_width": 14.27,
+  "top_features": {
+    "teammate_min_share": 0.494,
+    "season_avg": 0.139,
+    "el_avg10": 0.094,
+    "el_last1": 0.03,
+    "dom_avg5": 0.027,
+    "team_min_available": 0.025,
+    "el_avg3": 0.023,
+    "prev_season_avg": 0.02,
+    "min_last7d": 0.015,
+    "min_last14d": 0.013,
+    "el_std5": 0.013,
+    "team_net10": 0.012,
+    "el_games_career": 0.01,
+    "abs_exp_margin": 0.009,
+    "trend": 0.009
+  }
+}

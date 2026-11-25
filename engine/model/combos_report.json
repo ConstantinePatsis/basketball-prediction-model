@@ -1,0 +1,329 @@
+{
+ "copula_correlation_pts_reb_ast": [
+  [
+   1.0,
+   0.058,
+   -0.029
+  ],
+  [
+   0.058,
+   1.0,
+   0.012
+  ],
+  [
+   -0.029,
+   0.012,
+   1.0
+  ]
+ ],
+ "pir_variance_per_minute": 2.162,
+ "results_test": {
+  "Points+Rebounds+Assists": {
+   "n": 11223,
+   "over_rate": 0.488,
+   "Brier model (calibrated)": 0.2388,
+   "Brier model (raw)": 0.2389,
+   "Brier if stats treated as independent": 0.2392,
+   "Brier naive": 0.2524,
+   "Brier coin-flip": 0.25,
+   "MAE of mean": 5.17,
+   "MAE naive": 5.33
+  },
+  "Points+Rebounds": {
+   "n": 11223,
+   "over_rate": 0.477,
+   "Brier model (calibrated)": 0.2405,
+   "Brier model (raw)": 0.241,
+   "Brier if stats treated as independent": 0.2414,
+   "Brier naive": 0.2517,
+   "Brier coin-flip": 0.25,
+   "MAE of mean": 4.78,
+   "MAE naive": 4.9
+  },
+  "Points+Assists": {
+   "n": 11223,
+   "over_rate": 0.48,
+   "Brier model (calibrated)": 0.2396,
+   "Brier model (raw)": 0.2402,
+   "Brier if stats treated as independent": 0.2404,
+   "Brier naive": 0.2518,
+   "Brier coin-flip": 0.25,
+   "MAE of mean": 4.37,
+   "MAE naive": 4.49
+  },
+  "Rebounds+Assists": {
+   "n": 11223,
+   "over_rate": 0.488,
+   "Brier model (calibrated)": 0.2365,
+   "Brier model (raw)": 0.236,
+   "Brier if stats treated as independent": 0.2359,
+   "Brier naive": 0.2535,
+   "Brier coin-flip": 0.25,
+   "MAE of mean": 2.1,
+   "MAE naive": 2.17
+  },
+  "PIR": {
+   "n": 11223,
+   "over_rate": 0.468,
+   "Brier model (calibrated)": 0.2408,
+   "Brier model (raw)": 0.2414,
+   "Brier if stats treated as independent": null,
+   "Brier naive": 0.2484,
+   "Brier coin-flip": 0.25,
+   "MAE of mean": 5.57,
+   "MAE naive": 5.69
+  }
+ },
+ "calibration_test": {
+  "Points+Rebounds+Assists": [
+   {
+    "b": "(0.0, 0.3]",
+    "n": 575,
+    "predicted": 0.209,
+    "actual": 0.25
+   },
+   {
+    "b": "(0.3, 0.4]",
+    "n": 874,
+    "predicted": 0.349,
+    "actual": 0.336
+   },
+   {
+    "b": "(0.4, 0.45]",
+    "n": 1657,
+    "predicted": 0.423,
+    "actual": 0.419
+   },
+   {
+    "b": "(0.45, 0.5]",
+    "n": 964,
+    "predicted": 0.466,
+    "actual": 0.439
+   },
+   {
+    "b": "(0.5, 0.55]",
+    "n": 3806,
+    "predicted": 0.512,
+    "actual": 0.484
+   },
+   {
+    "b": "(0.55, 0.6]",
+    "n": 1432,
+    "predicted": 0.566,
+    "actual": 0.572
+   },
+   {
+    "b": "(0.6, 0.7]",
+    "n": 1321,
+    "predicted": 0.652,
+    "actual": 0.625
+   },
+   {
+    "b": "(0.7, 1.0]",
+    "n": 594,
+    "predicted": 0.756,
+    "actual": 0.722
+   }
+  ],
+  "Points+Rebounds": [
+   {
+    "b": "(0.0, 0.3]",
+    "n": 627,
+    "predicted": 0.205,
+    "actual": 0.273
+   },
+   {
+    "b": "(0.3, 0.4]",
+    "n": 1062,
+    "predicted": 0.349,
+    "actual": 0.338
+   },
+   {
+    "b": "(0.4, 0.45]",
+    "n": 2521,
+    "predicted": 0.433,
+    "actual": 0.43
+   },
+   {
+    "b": "(0.45, 0.5]",
+    "n": 2853,
+    "predicted": 0.481,
+    "actual": 0.474
+   },
+   {
+    "b": "(0.5, 0.55]",
+    "n": 764,
+    "predicted": 0.547,
+    "actual": 0.476
+   },
+   {
+    "b": "(0.55, 0.6]",
+    "n": 2337,
+    "predicted": 0.58,
+    "actual": 0.575
+   },
+   {
+    "b": "(0.6, 0.7]",
+    "n": 737,
+    "predicted": 0.651,
+    "actual": 0.617
+   },
+   {
+    "b": "(0.7, 1.0]",
+    "n": 322,
+    "predicted": 0.789,
+    "actual": 0.711
+   }
+  ],
+  "Points+Assists": [
+   {
+    "b": "(0.0, 0.3]",
+    "n": 789,
+    "predicted": 0.234,
+    "actual": 0.248
+   },
+   {
+    "b": "(0.3, 0.4]",
+    "n": 1498,
+    "predicted": 0.363,
+    "actual": 0.377
+   },
+   {
+    "b": "(0.4, 0.45]",
+    "n": 1567,
+    "predicted": 0.446,
+    "actual": 0.429
+   },
+   {
+    "b": "(0.45, 0.5]",
+    "n": 2755,
+    "predicted": 0.486,
+    "actual": 0.478
+   },
+   {
+    "b": "(0.5, 0.55]",
+    "n": 109,
+    "predicted": 0.53,
+    "actual": 0.514
+   },
+   {
+    "b": "(0.55, 0.6]",
+    "n": 3195,
+    "predicted": 0.565,
+    "actual": 0.541
+   },
+   {
+    "b": "(0.6, 0.7]",
+    "n": 1149,
+    "predicted": 0.622,
+    "actual": 0.636
+   },
+   {
+    "b": "(0.7, 1.0]",
+    "n": 161,
+    "predicted": 0.831,
+    "actual": 0.745
+   }
+  ],
+  "Rebounds+Assists": [
+   {
+    "b": "(0.0, 0.3]",
+    "n": 133,
+    "predicted": 0.146,
+    "actual": 0.165
+   },
+   {
+    "b": "(0.3, 0.4]",
+    "n": 1221,
+    "predicted": 0.356,
+    "actual": 0.317
+   },
+   {
+    "b": "(0.4, 0.45]",
+    "n": 3050,
+    "predicted": 0.419,
+    "actual": 0.401
+   },
+   {
+    "b": "(0.45, 0.5]",
+    "n": 918,
+    "predicted": 0.474,
+    "actual": 0.451
+   },
+   {
+    "b": "(0.5, 0.55]",
+    "n": 3449,
+    "predicted": 0.517,
+    "actual": 0.53
+   },
+   {
+    "b": "(0.55, 0.6]",
+    "n": 878,
+    "predicted": 0.588,
+    "actual": 0.61
+   },
+   {
+    "b": "(0.6, 0.7]",
+    "n": 642,
+    "predicted": 0.625,
+    "actual": 0.639
+   },
+   {
+    "b": "(0.7, 1.0]",
+    "n": 932,
+    "predicted": 0.733,
+    "actual": 0.704
+   }
+  ],
+  "PIR": [
+   {
+    "b": "(0.0, 0.3]",
+    "n": 177,
+    "predicted": 0.13,
+    "actual": 0.232
+   },
+   {
+    "b": "(0.3, 0.4]",
+    "n": 2327,
+    "predicted": 0.365,
+    "actual": 0.364
+   },
+   {
+    "b": "(0.4, 0.45]",
+    "n": 424,
+    "predicted": 0.44,
+    "actual": 0.356
+   },
+   {
+    "b": "(0.45, 0.5]",
+    "n": 3519,
+    "predicted": 0.472,
+    "actual": 0.448
+   },
+   {
+    "b": "(0.5, 0.55]",
+    "n": 2584,
+    "predicted": 0.522,
+    "actual": 0.502
+   },
+   {
+    "b": "(0.55, 0.6]",
+    "n": 1343,
+    "predicted": 0.585,
+    "actual": 0.576
+   },
+   {
+    "b": "(0.6, 0.7]",
+    "n": 649,
+    "predicted": 0.685,
+    "actual": 0.653
+   },
+   {
+    "b": "(0.7, 1.0]",
+    "n": 200,
+    "predicted": 0.802,
+    "actual": 0.72
+   }
+  ]
+ }
+}
