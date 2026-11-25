@@ -14,7 +14,8 @@ player-prop lines. Picks are logged before tip-off and graded from official box 
 
 ## Setup
 1. Repository secret `ODDSPAPI_KEY` (Settings → Secrets and variables → Actions).
-2. Vercel: import the repo, set **Root Directory** to `web`, add environment variable `SITE_PASSWORD`.
+2. Vercel: import the repo, set **Root Directory** to `web`, add environment variable `SITE_PASSWORD` (Production), then redeploy.
+   Live at https://model.konstantinospatsis.com (user `konstantinos`).
 3. Optional: add a custom domain in Vercel → Project → Settings → Domains.
 
 ## Results so far
