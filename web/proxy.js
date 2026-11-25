@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 
 // Private site: HTTP basic auth. Set SITE_PASSWORD (and optionally SITE_USER) in Vercel's environment variables.
-export function middleware(req) {
+export function proxy(req) {
   const password = process.env.SITE_PASSWORD;
   if (!password) return new NextResponse("Site locked: set SITE_PASSWORD in Vercel.", { status: 503 });
   const user = process.env.SITE_USER || "konstantinos";
