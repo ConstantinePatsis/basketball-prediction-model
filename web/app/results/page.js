@@ -1,46 +1,49 @@
-import { results, eur, when } from "@/lib";
+import { results, eur } from "@/lib";
 function Chart({ points }) {
-  if (!points?.length) return null;
-  const W = 900, H = 200, P = 12, vals = points.map((p) => p.profit_eur), mx = Math.max(0, ...vals), mn = Math.min(0, ...vals);
-  const x = (i) => (points.length === 1 ? W / 2 : (i / (points.length - 1)) * W), y = (v) => P + (H - 2 * P) - ((v - mn) / (mx - mn || 1)) * (H - 2 * P);
+  if (!points || points.length < 2) return <p className="dim">The chart starts after the first graded night.</p>;
+  const W = 900, H = 220, P = 18, v = points.map((p) => p.profit_eur), mx = Math.max(0, ...v), mn = Math.min(0, ...v);
+  const x = (i) => P + (i / (points.length - 1)) * (W - 2 * P), y = (val) => P + (H - 2 * P) * (1 - (val - mn) / (mx - mn || 1));
   const d = points.map((p, i) => `${i ? "L" : "M"}${x(i).toFixed(1)},${y(p.profit_eur).toFixed(1)}`).join(" ");
-  return (<svg viewBox={`0 0 ${W} ${H + 20}`} style={{ width: "100%" }}>
-    <line x1="0" x2={W} y1={y(0)} y2={y(0)} stroke="#262c36" />
-    <path d={d} fill="none" stroke="#f0883e" strokeWidth="2.5" />
-    {points.map((p, i) => <circle key={i} cx={x(i)} cy={y(p.profit_eur)} r="3.5" fill="#f0883e" />)}
-    <text x="0" y={H + 16} fill="#8b949e" fontSize="12">{points[0].date}</text>
-    <text x={W} y={H + 16} fill="#8b949e" fontSize="12" textAnchor="end">{points.at(-1).date}</text>
+  return (<svg viewBox={`0 0 ${W} ${H + 18}`} width="100%" role="img" aria-label="Cumulative paper profit">
+    <line x1={P} x2={W - P} y1={y(0)} y2={y(0)} stroke="#D9DEE5" strokeWidth="1.5" />
+    <text x={P} y={y(0) - 6} fontSize="12" fill="#5D6B7E">€0</text>
+    <path d={d} fill="none" stroke="#E2611B" strokeWidth="3" strokeLinejoin="round" />
+    {points.map((p, i) => <circle key={i} cx={x(i)} cy={y(p.profit_eur)} r="4" fill="#E2611B" />)}
+    <text x={W - P} y={y(v.at(-1)) - 10} textAnchor="end" fontSize="16" fontWeight="700" fill="#13233F" fontFamily="Barlow Condensed">{eur(v.at(-1))}</text>
+    <text x={P} y={H + 14} fontSize="12" fill="#5D6B7E">{points[1].date}</text>
+    <text x={W - P} y={H + 14} fontSize="12" fill="#5D6B7E" textAnchor="end">{points.at(-1).date}</text>
   </svg>);
 }
 function Split({ title, rows }) {
-  return (<><h2>{title}</h2><div className="tablewrap"><table><thead><tr><th></th><th className="num">Bets</th><th className="num">Win %</th>
-    <th className="num">Break-even %</th><th className="num">Profit</th><th className="num">ROI</th></tr></thead><tbody>
-    {Object.entries(rows || {}).map(([k, v]) => (<tr key={k}><td>{k}</td><td className="num">{v.bets}</td><td className="num">{v.win_pct}%</td>
-      <td className="num muted">{v.breakeven_pct}%</td><td className={`num ${v.profit_eur >= 0 ? "pos" : "neg"}`}>{eur(v.profit_eur)}</td>
-      <td className={`num ${v.roi_pct >= 0 ? "pos" : "neg"}`}>{v.roi_pct}%</td></tr>))}</tbody></table></div></>);
+  return (<><h2>{title}</h2><div className="board"><table><thead><tr><th></th><th className="n">Picks</th><th className="n">Won</th><th className="n">Win rate</th>
+    <th className="n">Needed to break even</th><th className="n">Paper profit</th><th className="n">Return per pick</th></tr></thead><tbody>
+    {Object.entries(rows || {}).map(([k, s]) => (<tr key={k}><td><b>{k}</b></td><td className="n">{s.bets}</td><td className="n">{s.wins}</td><td className="n">{s.win_pct}%</td>
+      <td className="n dim">{s.breakeven_pct}%</td><td className={`n ${s.profit_eur >= 0 ? "pos" : "neg"}`}>{eur(s.profit_eur)}</td>
+      <td className={`n ${s.roi_pct >= 0 ? "pos" : "neg"}`}>{s.roi_pct}%</td></tr>))}</tbody></table></div></>);
 }
+const TAGS = { injury: "Team missing a regular", after_hot_game: "After a big game", after_cold_game: "After a quiet game", plain: "No special situation" };
 export default function Results() {
   const o = results.overall || {}, a = results.accuracy || {};
   return (<>
     <h1>Paper results</h1>
-    <p className="sub">Every flagged pick, €{results.stake_eur} paper stake each, graded with official box scores. Voids (player didn't play) excluded.</p>
-    <div className="grid">
-      <div className="card kpi"><div className={`v ${o.profit_eur >= 0 ? "pos" : "neg"}`}>{eur(o.profit_eur)}</div><div className="l">Paper profit</div></div>
-      <div className="card kpi"><div className="v">{o.roi_pct ?? "–"}%</div><div className="l">Return per bet</div></div>
-      <div className="card kpi"><div className="v">{o.wins ?? 0}–{o.losses ?? 0}</div><div className="l">Won–lost ({o.win_pct ?? "–"}%, break-even {o.breakeven_pct ?? "–"}%)</div></div>
-      <div className="card kpi"><div className="v">{a.brier_model ?? "–"} <span className="muted" style={{ fontSize: 15 }}>vs {a.brier_stoiximan ?? "–"}</span></div><div className="l">Accuracy, model vs Stoiximan (lower is better, {a.lines ?? 0} lines)</div></div>
+    <p className="lede">Every pick is logged before tip-off with a €{results.stake_eur} paper stake and graded from the official box score. Players who don't play are void.</p>
+    <div className="stats">
+      <div className="stat"><strong className={o.profit_eur >= 0 ? "pos" : "neg"}>{eur(o.profit_eur)}</strong><span>paper profit on {o.bets} picks</span></div>
+      <div className="stat"><strong>{o.win_pct ?? "–"}%</strong><span>won ({o.wins}–{o.losses}); {o.breakeven_pct}% needed to break even</span></div>
+      <div className="stat"><strong>{o.roi_pct ?? "–"}%</strong><span>return per pick</span></div>
+      <div className="stat"><strong>{a.brier_model ?? "–"}</strong><span>model accuracy score vs Stoiximan's {a.brier_stoiximan ?? "–"} (lower is better)</span></div>
     </div>
-    <div className="note">{o.bets < 300 ? `${o.bets} settled bets is a small sample. Results mean little before a few hundred.` : "Sample is getting meaningful; keep watching the trend, not single nights."} {results.pending ? `${results.pending} picks waiting for results.` : ""}</div>
-    <h2>Cumulative paper profit</h2><div className="card"><Chart points={results.cumulative} /></div>
-    <Split title="By size of disagreement (points)" rows={results.by_edge} />
-    <Split title="Over vs under" rows={results.by_side} />
+    <div className="note">{o.bets < 300 ? `${o.bets} graded picks is still a small sample; a few hundred are needed before the numbers mean much.` : "The sample is getting meaningful. Watch the trend, not single nights."}{results.pending ? ` ${results.pending} picks are waiting for their games.` : ""}</div>
+    <h2>Paper profit over time</h2><div className="stat"><Chart points={results.cumulative} /></div>
+    <Split title="By size of the gap (points)" rows={results.by_edge} />
+    <Split title="Over or under" rows={results.by_side} />
     <Split title="By stat" rows={results.by_stat} />
-    <Split title="By situation" rows={results.by_tag} />
+    <Split title="By situation" rows={Object.fromEntries(Object.entries(results.by_tag || {}).map(([k, v]) => [TAGS[k] || k, v]))} />
     <h2>Latest graded picks</h2>
-    <div className="tablewrap"><table><thead><tr><th>Game</th><th>Player</th><th>Bet</th><th className="num">Odds</th><th className="num">Actual</th><th>Result</th><th className="num">€</th></tr></thead>
-      <tbody>{(results.recent || []).map((r, i) => (<tr key={i}><td className="muted">{r.game}</td><td>{r.player}</td>
+    <div className="board"><table><thead><tr><th>Game</th><th>Player</th><th>Pick</th><th className="n">Odds</th><th className="n">Actual</th><th>Result</th><th className="n">Paper €</th></tr></thead>
+      <tbody>{(results.recent || []).map((r, i) => (<tr key={i}><td className="dim">{r.game}</td><td><b>{r.player}</b></td>
         <td><span className={`side ${r.side}`}>{r.side === "OVER" ? "Over" : "Under"}</span> {r.line} {r.stat_label}</td>
-        <td className="num">{r.bet_odds?.toFixed(2)}</td><td className="num">{r.actual}</td>
-        <td className={r.result}>{r.result}</td><td className={`num ${r.profit_eur >= 0 ? "pos" : "neg"}`}>{eur(r.profit_eur)}</td></tr>))}</tbody></table></div>
+        <td className="n">{r.bet_odds?.toFixed(2)}</td><td className="n">{r.actual}</td><td className={r.result}>{r.result === "win" ? "Won" : "Lost"}</td>
+        <td className={`n ${r.profit_eur >= 0 ? "pos" : "neg"}`}>{eur(r.profit_eur)}</td></tr>))}</tbody></table></div>
   </>);
 }

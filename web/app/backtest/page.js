@@ -1,15 +1,19 @@
 import { backtest } from "@/lib";
 export default function Backtest() {
-  const b = backtest || {}, acc = b["accuracy (Brier, lower=better)"] || {}, e5 = b["BETS: model edge >= 5 pts"] || {}, e10 = b["BETS: model edge >= 10 pts"] || {};
-  const rows = [["Model gap ≥ 5 points", e5], ["Model gap ≥ 10 points", e10], ["Blend of model + Stoiximan, later rounds", b["BETS on later rounds using the blend, edge >= 3 pts"] || {}]];
+  const b = backtest || {}, acc = b["accuracy (Brier, lower=better)"] || {};
+  const rows = [["Gap of 5+ points", b["BETS: model edge >= 5 pts"]], ["Gap of 10+ points", b["BETS: model edge >= 10 pts"]], ["Model and Stoiximan blended, later rounds", b["BETS on later rounds using the blend, edge >= 3 pts"]]];
   return (<>
     <h1>Backtest against Stoiximan</h1>
-    <p className="sub">{b["lines graded"]} real Stoiximan player-prop lines from {b.games} EuroLeague games (2026-27, rounds 1–13). Price taken 6 hours before tip-off; model used only pre-game information.</p>
-    <div className="tablewrap card"><table><thead><tr><th></th><th className="num">Bets</th><th className="num">Win %</th><th className="num">Break-even %</th><th className="num">ROI</th><th className="num">95% range</th></tr></thead>
-      <tbody>{rows.map(([k, v]) => (<tr key={k}><td>{k}</td><td className="num">{v.bets}</td><td className="num">{v["win %"]}%</td><td className="num muted">{v["break-even win %"]}%</td>
-        <td className="num pos">{v["ROI %"]}%</td><td className="num muted">{v["ROI 95% range %"]?.join("% to ")}%</td></tr>))}</tbody></table></div>
-    <h2>Accuracy (Brier score, lower is better)</h2>
-    <div className="grid">{Object.entries(acc).map(([k, v]) => (<div className="card kpi" key={k}><div className="v">{v}</div><div className="l">{k}</div></div>))}</div>
-    <div className="note">Checks passed: not just betting unders (blind unders lose 1.2%), still +9% with no injury knowledge, positive in every month. Limits: one bookmaker, ~2.5 months; real bookmakers limit winning accounts.</div>
+    <p className="lede">{b["lines graded"]} real Stoiximan player-prop lines from {b.games} games this season, priced 6 hours before tip-off. The model only used information available before each game.</p>
+    <div className="board"><table><thead><tr><th></th><th className="n">Picks</th><th className="n">Win rate</th><th className="n">Needed</th><th className="n">Return per pick</th><th className="n">Likely range</th></tr></thead>
+      <tbody>{rows.map(([k, v = {}]) => (<tr key={k}><td><b>{k}</b></td><td className="n">{v.bets}</td><td className="n">{v["win %"]}%</td><td className="n dim">{v["break-even win %"]}%</td>
+        <td className="n pos">+{v["ROI %"]}%</td><td className="n dim">{v["ROI 95% range %"]?.map((x) => `${x > 0 ? "+" : ""}${x}%`).join(" to ")}</td></tr>))}</tbody></table></div>
+    <h2>Accuracy score (lower is better)</h2>
+    <div className="stats">
+      <div className="stat"><strong>{acc.model}</strong><span>model</span></div>
+      <div className="stat"><strong>{acc["Stoiximan at bet time"]}</strong><span>Stoiximan</span></div>
+      <div className="stat"><strong>{acc["coin flip"]}</strong><span>coin flip</span></div>
+    </div>
+    <div className="note">Checks passed: it isn't just betting unders (blind unders lose 1.2%), it still makes about +9% with no injury news at all, and it was positive in every month. Limits: one bookmaker and about 2.5 months of games.</div>
   </>);
 }

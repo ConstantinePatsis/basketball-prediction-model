@@ -1,27 +1,39 @@
-import { slate, when } from "@/lib";
-import LinesTable from "@/components/LinesTable";
-const NAMES = { MUN: "Bayern", TEL: "Maccabi", PAM: "Valencia", PAN: "Panathinaikos", ASV: "ASVEL", MIL: "Milan", BAR: "Barcelona",
-  ULK: "Fenerbahçe", DUB: "Dubai", PAR: "Partizan", OLY: "Olympiacos", HTA: "Hapoel Tel Aviv", BAS: "Baskonia", IST: "Anadolu Efes",
-  MAD: "Real Madrid", ZAL: "Žalgiris", RED: "Crvena Zvezda", VIR: "Virtus", PRS: "Paris", BES: "Beşiktaş", MCO: "Monaco" };
-const n = (c) => NAMES[c] || c;
+import Link from "next/link";
+import { slate, pct, gap, ev, mins, side, time, day } from "@/lib";
 export default function Today() {
   const games = slate.games || [];
-  const picks = games.reduce((a, g) => a + g.lines.filter((l) => l.pick).length, 0);
+  if (!games.length) return (<><h1>No games on the slate</h1><p className="lede">The next EuroLeague games appear here on game-day morning, after the 10:15 run.</p></>);
+  const all = games.flatMap((g) => g.lines.filter((l) => l.pick).map((l) => ({ ...l, gid: g.id, game: `${g.home_name} – ${g.away_name}` })));
+  const best = all.sort((a, b) => b.edge - a.edge).slice(0, 15);
   return (<>
-    <h1>{games.length ? "Upcoming games" : "No upcoming games"}</h1>
-    <p className="sub">{games.length ? `Round ${slate.round} · ${games.length} games · ${picks} picks where the model beats Stoiximan's price by 5+ points.` : "The next slate appears here on game day morning."}</p>
-    <div className="note">Paper trading only. These are a model's estimates for research, recorded before tip-off and graded afterwards. Not betting advice.</div>
-    {games.map((g) => (
-      <section className="game card" key={g.game}>
-        <div className="head"><h2>{n(g.home)} – {n(g.away)}</h2><span className="muted">{when(g.tipoff)}</span></div>
-        <div style={{ margin: "8px 0 4px" }}>
-          {[g.home, g.away].map((t) => (g.injuries[t] || []).map((p) => (
-            <span key={t + p.player} className={`pill ${p.status === "OUT" ? "out" : "gtd"}`} style={{ marginRight: 6 }}>
-              {n(t)}: {p.player} {p.status === "OUT" ? "out" : p.status === "GTD" ? "doubtful" : "likely out"}</span>)))}
-        </div>
-        <h3 className="muted" style={{ fontSize: 13, fontWeight: 500, margin: "14px 0 0" }}>Top 10 disagreements</h3>
-        <LinesTable lines={g.lines} compact />
-        <details><summary>All {g.lines.length} lines for this game</summary><LinesTable lines={g.lines} /></details>
-      </section>))}
+    <h1>{day(games[0].tipoff)}</h1>
+    <p className="lede">Round {slate.round}. {games.length} games, {all.length} lines where the model's chance beats Stoiximan's by at least 5 points. Pick a game to see the reasoning behind each pick.</p>
+    <div className="strip">
+      {games.map((g) => {
+        const p = g.lines.filter((l) => l.pick), out = [...(g.injuries[g.home] || []), ...(g.injuries[g.away] || [])].filter((x) => x.status === "OUT").length;
+        return (<Link className="tile" href={`/game/${g.id}`} key={g.id}>
+          <div className="time">{time(g.tipoff)} Athens</div>
+          <div className="teams">{g.home_name}<span>vs</span>{g.away_name}</div>
+          <div className="facts"><span><strong>{p.length}</strong>picks</span><span><strong>{p.length ? gap(p[0].edge) : "–"}</strong>top gap</span><span><strong>{out}</strong>out</span></div>
+        </Link>);
+      })}
+    </div>
+    <h2>Biggest disagreements today</h2>
+    <div className="board"><table>
+      <thead><tr><th>Player</th><th>Pick</th><th className="n">Odds</th><th className="n">Projection</th><th className="n">Model</th><th className="n">Stoiximan</th>
+        <th className="n">Gap</th><th className="n">EV</th><th className="n">Minutes</th><th className="n">L10</th><th></th></tr></thead>
+      <tbody>{best.map((l, i) => (
+        <tr key={i}>
+          <td className="who"><Link href={`/game/${l.gid}`}><b>{l.player}</b><small>{l.team}</small></Link></td>
+          <td><span className={`side ${l.side}`}>{side(l.side)}</span> {l.line} {l.stat_label}</td>
+          <td className="n">{l.odds.toFixed(2)}</td><td className="n">{l.model_mean.toFixed(1)}</td>
+          <td className="n">{pct(l.model_p)}</td><td className="n dim">{pct(l.book_p)}</td>
+          <td className="n"><span className={`gap ${l.edge >= 0.15 ? "big" : ""}`}>{gap(l.edge)}</span></td>
+          <td className="n">{ev(l.ev)}</td><td className="n">{mins(l)}</td>
+          <td className="n">{l.n_l10 ? `${l.hit_l10}/${l.n_l10}` : "–"}</td>
+          <td>{l.tier && <span className={`tier ${l.tier}`}>{l.tier}</span>}</td>
+        </tr>))}</tbody>
+    </table></div>
+    <p className="disclaimer">Gap: model's chance minus Stoiximan's, in percentage points. EV: expected return per bet if the model is right. Minutes: expected, with normal range. L10: how often this pick would have won in his last 10 games. Paper trading only.</p>
   </>);
 }

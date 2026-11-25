@@ -1,14 +1,14 @@
 export default function About() {
   const steps = [
-    ["Collect history", "10 seasons of EuroLeague box scores plus 8 domestic leagues (~23,000 games), linked player by player."],
-    ["Read injury news", "The official EuroLeague report (via Eurohoops) is parsed each game day: players ruled out are removed, returning players added back."],
-    ["Predict minutes", "A model trained on 2016–2023 predicts each player's minutes and a realistic low/high range."],
-    ["Predict per-minute production", "Points, rebounds, assists and threes per minute from recent and long-term form, matchup and opponent."],
-    ["Simulate 8,000 games", "Each run draws minutes and stats; counting the runs gives the chance of every over/under line."],
-    ["Compare with Stoiximan", "Odds are turned into Stoiximan's chance with its margin removed. A gap of 5+ points is flagged as a pick."],
-    ["Record and grade", "Picks are logged with a timestamp before tip-off and graded automatically from the official box score."],
+    ["Collect the history", "Ten seasons of EuroLeague box scores plus eight domestic leagues, about 23,000 games, linked player by player."],
+    ["Read the injury news", "Each game day the official injury report is read automatically. Players ruled out are removed and their minutes go to their usual replacements."],
+    ["Predict minutes", "A model trained on 2016–2023 predicts each player's minutes and a normal range."],
+    ["Predict production per minute", "Points, rebounds, assists and threes per minute from recent and long-term form, the opponent and the game situation."],
+    ["Play the game 8,000 times", "Each run draws realistic minutes and stats. Counting the runs gives the chance of every over and under."],
+    ["Compare with Stoiximan", "Odds become Stoiximan's chance with its margin removed. When the model's chance is 5+ points higher, the line becomes a pick."],
+    ["Log and grade", "Picks are saved before tip-off and graded from the official box score after the game."],
   ];
-  return (<><h1>How it works</h1><p className="sub">Runs automatically on GitHub Actions each game day; this site rebuilds after every run.</p>
-    {steps.map(([t, d], i) => (<div className="card" key={t} style={{ marginBottom: 10 }}><b>{i + 1}. {t}</b><div className="muted">{d}</div></div>))}
-    <div className="note">Research and paper trading only.</div></>);
+  return (<><h1>How it works</h1><p className="lede">The engine runs by itself on game days at 10:15 and 16:30, and grades results at 00:40 (Athens time).</p>
+    <ol className="steps">{steps.map(([t, d]) => <li key={t}><b>{t}</b><span className="dim">{d}</span></li>)}</ol>
+    <p className="disclaimer">Research and paper trading only.</p></>);
 }
