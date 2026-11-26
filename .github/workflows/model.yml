@@ -2,9 +2,13 @@ name: EuroLeague model
 
 on:
   schedule:
-    - cron: "15 8 * * *"    # 10:15 Athens (winter time): picks
-    - cron: "30 14 * * *"   # 16:30 Athens: refresh picks with updated injury reports
-    - cron: "40 22 * * *"   # 00:40 Athens: grade last night's picks
+    # Picks every 2 hours on EuroLeague game days (Tue-Fri), 09:07-21:07 Athens winter time.
+    # GitHub's timer can run hours late, so several runs make sure one lands before tip-off.
+    # Picks are only logged for games that haven't started, and each line is logged once.
+    # Off-minute (:07) avoids GitHub's busiest top-of-hour slots.
+    - cron: "7 7,9,11,13,15,17,19 * * 2-5"
+    - cron: "41 22 * * *"   # 00:41 Athens: grade last night's picks
+    - cron: "23 5 * * *"    # 07:23 Athens: second grading pass in case the first ran early or failed
   workflow_dispatch:
     inputs:
       mode:
@@ -58,7 +62,10 @@ jobs:
         run: |
           MODE="${{ github.event.inputs.mode }}"
           if [ -z "$MODE" ]; then
-            if [ "${{ github.event.schedule }}" = "40 22 * * *" ]; then MODE=grade; else MODE=picks; fi
+            case "${{ github.event.schedule }}" in
+              "41 22 * * *"|"23 5 * * *") MODE=grade ;;
+              *) MODE=picks ;;
+            esac
           fi
           echo "mode=$MODE" >> "$GITHUB_OUTPUT"
 

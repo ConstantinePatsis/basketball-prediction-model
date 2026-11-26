@@ -10,7 +10,7 @@ player-prop lines. Picks are logged before tip-off and graded from official box 
   - `runner/export_site.py` – writes the website data
 - `web/` – Next.js site (Vercel), password protected
 - `data/seed/` – starting databases; later runs keep databases in the GitHub Actions cache
-- `.github/workflows/model.yml` – schedule: 10:15 and 16:30 picks, 00:40 grading (Athens time)
+- `.github/workflows/model.yml` – schedule: picks every 2 hours on game days (Tue–Fri), grading at 00:41 and 07:23 (Athens time)
 
 ## Setup
 1. Repository secret `ODDSPAPI_KEY` (Settings → Secrets and variables → Actions).
