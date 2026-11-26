@@ -82,7 +82,14 @@ def picks():
         return False
     L.to_csv(f"{RUN}/lines.csv", index=False)
     print(f"{len(L)} player-prop lines", flush=True)
-    sh([sys.executable, "update_data.py"], RUN)
+    # full data refresh (all leagues) once per day; later runs only refresh odds, injuries and picks
+    marker = f"{BASE}/dbs/.updated_{now.strftime('%Y%m%d')}"
+    if not os.path.exists(marker):
+        if sh([sys.executable, "update_data.py"], RUN):
+            os.makedirs(os.path.dirname(marker), exist_ok=True)
+            open(marker, "w").write(now.isoformat())
+    else:
+        print("Data already refreshed today; skipping the full update.", flush=True)
     if not sh([sys.executable, "predict_round.py"], RUN):
         return False
     rounds = [int(f[18:-4]) for f in os.listdir(RUN) if f.startswith("lines_scored_round") and f.endswith(".csv")]
