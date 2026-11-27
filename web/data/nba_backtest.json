@@ -1,248 +1,270 @@
 {
- "lines graded": 13515,
- "games": 140,
- "from": "2026-11-05",
+ "lines graded": 25029,
+ "games": 253,
+ "from": "2026-10-20",
  "to": "2026-11-26",
- "bookmaker margin %": 8.3,
+ "bookmaker margin %": 8.5,
  "accuracy (Brier, lower=better)": {
-  "model": 0.2501,
-  "Stoiximan at bet time": 0.2507,
-  "blend 55/45": 0.2479,
+  "model": 0.2512,
+  "Stoiximan at bet time": 0.2505,
+  "blend 55/45": 0.2481,
   "coin flip": 0.25
  },
  "strategies": {
   "Top 10 per game (the paper strategy)": {
-   "bets": 1394,
-   "win %": 59.0,
-   "break-even win %": 49.9,
-   "ROI %": 19.7,
+   "bets": 2524,
+   "win %": 57.8,
+   "break-even win %": 50.3,
+   "ROI %": 16.5,
    "ROI 95% range %": [
-    12.9,
-    26.1
+    11.7,
+    21.3
    ],
-   "avg CLV (pts)": 0.51
+   "avg CLV (pts)": 0.52
   },
   "Gap of 5+ points": {
-   "bets": 7814,
-   "win %": 53.8,
-   "break-even win %": 52.9,
-   "ROI %": 2.5,
+   "bets": 15181,
+   "win %": 54.1,
+   "break-even win %": 53.0,
+   "ROI %": 2.8,
    "ROI 95% range %": [
-    -0.7,
-    5.4
+    0.5,
+    5.1
    ],
-   "avg CLV (pts)": 0.34
+   "avg CLV (pts)": 0.36
   },
   "Gap of 10+ points": {
-   "bets": 3514,
-   "win %": 56.8,
-   "break-even win %": 51.6,
-   "ROI %": 11.2,
+   "bets": 7498,
+   "win %": 55.9,
+   "break-even win %": 52.1,
+   "ROI %": 8.3,
    "ROI 95% range %": [
-    7.0,
-    15.5
+    5.4,
+    11.6
    ],
-   "avg CLV (pts)": 0.51
+   "avg CLV (pts)": 0.52
   },
   "Gap of 15+ points": {
-   "bets": 1560,
-   "win %": 59.2,
-   "break-even win %": 50.2,
-   "ROI %": 19.6,
+   "bets": 3563,
+   "win %": 57.2,
+   "break-even win %": 51.0,
+   "ROI %": 13.7,
    "ROI 95% range %": [
-    13.9,
-    25.3
+    9.7,
+    18.0
    ],
-   "avg CLV (pts)": 0.61
+   "avg CLV (pts)": 0.56
   }
  },
  "by stat (gap 5+)": {
   "Assists": {
-   "bets": 1090,
-   "win %": 56.1,
-   "break-even win %": 50.4,
-   "ROI %": 12.9,
+   "bets": 2078,
+   "win %": 56.2,
+   "break-even win %": 50.7,
+   "ROI %": 12.6,
    "ROI 95% range %": [
-    7.0,
-    18.7
+    7.9,
+    17.2
    ],
-   "avg CLV (pts)": 0.37
+   "avg CLV (pts)": 0.46
   },
   "Points": {
-   "bets": 905,
-   "win %": 52.4,
-   "break-even win %": 53.8,
-   "ROI %": -2.6,
+   "bets": 1793,
+   "win %": 52.9,
+   "break-even win %": 53.9,
+   "ROI %": -1.8,
    "ROI 95% range %": [
-    -8.3,
-    3.5
+    -6.5,
+    2.7
    ],
-   "avg CLV (pts)": 0.21
+   "avg CLV (pts)": 0.19
   },
   "Pts+Ast": {
-   "bets": 893,
-   "win %": 49.5,
-   "break-even win %": 53.9,
-   "ROI %": -8.2,
+   "bets": 1821,
+   "win %": 51.7,
+   "break-even win %": 54.1,
+   "ROI %": -4.4,
    "ROI 95% range %": [
-    -13.6,
-    -2.9
+    -8.3,
+    -0.4
    ],
-   "avg CLV (pts)": 0.11
+   "avg CLV (pts)": 0.01
   },
   "Pts+Reb": {
-   "bets": 999,
-   "win %": 52.6,
-   "break-even win %": 53.8,
-   "ROI %": -2.2,
+   "bets": 1945,
+   "win %": 53.6,
+   "break-even win %": 53.9,
+   "ROI %": -0.5,
    "ROI 95% range %": [
-    -7.5,
+    -4.4,
     3.2
    ],
-   "avg CLV (pts)": 0.12
+   "avg CLV (pts)": 0.16
   },
   "Pts+Reb+Ast": {
-   "bets": 922,
-   "win %": 52.6,
-   "break-even win %": 54.2,
-   "ROI %": -2.9,
+   "bets": 1755,
+   "win %": 52.2,
+   "break-even win %": 54.3,
+   "ROI %": -3.7,
    "ROI 95% range %": [
-    -8.6,
-    3.0
+    -8.0,
+    0.6
    ],
-   "avg CLV (pts)": -0.01
+   "avg CLV (pts)": 0.0
   },
   "Reb+Ast": {
-   "bets": 1035,
-   "win %": 55.3,
-   "break-even win %": 52.2,
-   "ROI %": 6.0,
+   "bets": 1970,
+   "win %": 54.2,
+   "break-even win %": 52.4,
+   "ROI %": 3.8,
    "ROI 95% range %": [
-    0.2,
-    11.6
+    -0.6,
+    8.2
    ],
-   "avg CLV (pts)": 0.23
+   "avg CLV (pts)": 0.25
   },
   "Rebounds": {
-   "bets": 1103,
-   "win %": 58.2,
-   "break-even win %": 52.1,
-   "ROI %": 13.0,
+   "bets": 2087,
+   "win %": 55.7,
+   "break-even win %": 52.2,
+   "ROI %": 7.6,
    "ROI 95% range %": [
-    7.3,
-    18.7
+    3.2,
+    11.8
    ],
-   "avg CLV (pts)": 0.49
+   "avg CLV (pts)": 0.38
   },
   "Threes": {
-   "bets": 867,
-   "win %": 52.4,
-   "break-even win %": 53.4,
-   "ROI %": -1.0,
+   "bets": 1732,
+   "win %": 56.1,
+   "break-even win %": 53.2,
+   "ROI %": 6.7,
    "ROI 95% range %": [
-    -7.1,
-    5.3
+    2.2,
+    11.4
    ],
-   "avg CLV (pts)": 0.55
+   "avg CLV (pts)": 0.63
   }
  },
  "by side (gap 5+)": {
   "Over": {
-   "bets": 3436,
-   "win %": 51.6,
-   "break-even win %": 52.8,
-   "ROI %": -1.8,
+   "bets": 6638,
+   "win %": 52.2,
+   "break-even win %": 53.0,
+   "ROI %": -1.0,
    "ROI 95% range %": [
-    -6.9,
-    3.1
+    -4.6,
+    2.6
    ],
    "avg CLV (pts)": 0.39
   },
   "Under": {
-   "bets": 4378,
-   "win %": 55.6,
-   "break-even win %": 52.9,
-   "ROI %": 5.9,
+   "bets": 8543,
+   "win %": 55.7,
+   "break-even win %": 53.0,
+   "ROI %": 5.8,
    "ROI 95% range %": [
-    1.9,
-    9.9
+    2.5,
+    9.0
    ],
-   "avg CLV (pts)": 0.31
+   "avg CLV (pts)": 0.33
   }
  },
  "by week (top 10 per game)": {
-  "2026-11-02/2026-11-08": {
-   "bets": 184,
-   "win %": 54.3,
-   "break-even win %": 50.1,
-   "ROI %": 9.6,
+  "2026-10-19/2026-10-25": {
+   "bets": 430,
+   "win %": 59.8,
+   "break-even win %": 50.6,
+   "ROI %": 20.0,
    "ROI 95% range %": [
-    -10.2,
-    28.3
+    6.9,
+    32.1
    ],
-   "avg CLV (pts)": 0.92
+   "avg CLV (pts)": 0.55
+  },
+  "2026-10-26/2026-11-01": {
+   "bets": 490,
+   "win %": 54.1,
+   "break-even win %": 50.7,
+   "ROI %": 7.8,
+   "ROI 95% range %": [
+    -3.9,
+    19.2
+   ],
+   "avg CLV (pts)": 0.56
+  },
+  "2026-11-02/2026-11-08": {
+   "bets": 394,
+   "win %": 56.9,
+   "break-even win %": 50.7,
+   "ROI %": 13.9,
+   "ROI 95% range %": [
+    2.1,
+    26.3
+   ],
+   "avg CLV (pts)": 0.57
   },
   "2026-11-09/2026-11-15": {
    "bets": 480,
-   "win %": 58.1,
+   "win %": 57.7,
    "break-even win %": 50.4,
-   "ROI %": 16.6,
+   "ROI %": 15.9,
    "ROI 95% range %": [
-    6.1,
-    26.3
+    6.3,
+    25.3
    ],
-   "avg CLV (pts)": 0.29
+   "avg CLV (pts)": 0.27
   },
   "2026-11-16/2026-11-22": {
    "bets": 510,
-   "win %": 61.0,
-   "break-even win %": 49.7,
-   "ROI %": 24.6,
+   "win %": 59.8,
+   "break-even win %": 49.8,
+   "ROI %": 22.4,
    "ROI 95% range %": [
-    14.8,
-    34.9
+    12.4,
+    32.9
    ],
-   "avg CLV (pts)": 0.59
+   "avg CLV (pts)": 0.68
   },
   "2026-11-23/2026-11-29": {
    "bets": 220,
-   "win %": 60.5,
+   "win %": 59.1,
    "break-even win %": 49.4,
-   "ROI %": 23.8,
+   "ROI %": 21.1,
    "ROI 95% range %": [
-    7.1,
-    40.5
+    5.2,
+    36.5
    ],
-   "avg CLV (pts)": 0.66
+   "avg CLV (pts)": 0.71
   }
  },
- "always under ROI %": -3.7,
- "always over ROI %": -10.8,
+ "always under ROI %": -3.5,
+ "always over ROI %": -11.2,
  "calibration (gap 5+): model chance vs actual win rate": [
   {
    "b": "(0.5, 0.6]",
-   "n": 4455,
-   "won": 0.513
+   "n": 7824,
+   "won": 0.521
   },
   {
    "b": "(0.6, 0.65]",
-   "n": 1892,
-   "won": 0.559
+   "n": 3873,
+   "won": 0.548
   },
   {
    "b": "(0.65, 0.7]",
-   "n": 922,
-   "won": 0.608
+   "n": 2088,
+   "won": 0.574
   },
   {
    "b": "(0.7, 0.75]",
-   "n": 221,
-   "won": 0.638
+   "n": 519,
+   "won": 0.636
   },
   {
    "b": "(0.75, 1.0]",
-   "n": 190,
-   "won": 0.542
+   "n": 548,
+   "won": 0.6
   }
  ]
 }

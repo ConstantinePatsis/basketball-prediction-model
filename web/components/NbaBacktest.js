@@ -22,6 +22,6 @@ export default function NbaBacktest({ b }) {
     <h2>Week by week (top 10 per game)</h2><Table rows={b["by week (top 10 per game)"]} />
     <h2>By stat (gap 5+)</h2><Table rows={b["by stat (gap 5+)"]} />
     <h2>Over or under (gap 5+)</h2><Table rows={b["by side (gap 5+)"]} />
-    <div className="note">Blind bets lose: always under {sign(b["always under ROI %"])}, always over {sign(b["always over ROI %"])}. The likely range resamples whole games, because lines in the same game tend to win or lose together. Limits: one bookmaker and a few weeks of one season, so treat the paper log as the real test.</div>
+    <div className="note">Blind bets lose: always under {sign(b["always under ROI %"])}, always over {sign(b["always over ROI %"])}. The likely range resamples whole games, because lines in the same game tend to win or lose together. Without injury news (assuming everyone from the last three games plays) the top-10 strategy still returned about +16%. The model is overconfident at the extremes: when it says 75%+, those picks won about 60%. Points and points-combo lines roughly break even; the gains come from assists, rebounds and threes. Limits: one bookmaker and five weeks of one season, so treat the paper log as the real test.</div>
   </>);
 }
