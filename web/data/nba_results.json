@@ -1,0 +1,19 @@
+{
+ "stake_eur": 10.0,
+ "overall": {
+  "bets": 0
+ },
+ "pending": 110,
+ "voids": 0,
+ "by_stat": {},
+ "by_side": {},
+ "by_edge": {},
+ "cumulative": [
+  {
+   "date": "start",
+   "profit_eur": 0.0
+  }
+ ],
+ "accuracy": {},
+ "recent": []
+}

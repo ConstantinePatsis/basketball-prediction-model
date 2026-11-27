@@ -1,4 +1,4 @@
-name: EuroLeague model
+name: Props model (EuroLeague + NBA)
 
 on:
   schedule:
@@ -9,13 +9,17 @@ on:
     - cron: "7 7,9,11,13,15,17,19 * * 2-5"
     - cron: "41 22 * * *"   # 00:41 Athens: grade last night's picks
     - cron: "23 5 * * *"    # 07:23 Athens: second grading pass in case the first ran early or failed
+    # NBA (games tip 00:00-04:30 Athens): picks at 19:17 and 00:17 Athens (props posted, injury report updated),
+    # graded at 10:17 Athens once the late West Coast games are final.
+    - cron: "17 17,22 * * *"
+    - cron: "17 8 * * *"
   workflow_dispatch:
     inputs:
       mode:
         description: "picks or grade"
         default: picks
         type: choice
-        options: [picks, grade]
+        options: [picks, grade, nba_picks, nba_grade]
 
 permissions:
   contents: write
@@ -47,12 +51,16 @@ jobs:
             engine/euroleague.db
             engine/basketball.db
             engine/dbs
+            engine/nba/nba.db
           key: data-${{ github.run_id }}
           restore-keys: data-
 
       - name: First run - unpack the starting databases
         if: steps.cache.outputs.cache-matched-key == ''
         run: tar -xJf data/seed/data_seed.tar.xz -C engine
+
+      - name: NBA database (first run, or a cache saved before the NBA was added)
+        run: test -f engine/nba/nba.db || tar -xJf data/seed/nba_seed.tar.xz -C engine/nba
 
       - name: Point /home/claude at the engine (scripts use that path)
         run: sudo ln -sfn "$GITHUB_WORKSPACE/engine" /home/claude
@@ -64,6 +72,8 @@ jobs:
           if [ -z "$MODE" ]; then
             case "${{ github.event.schedule }}" in
               "41 22 * * *"|"23 5 * * *") MODE=grade ;;
+              "17 17,22 * * *") MODE=nba_picks ;;
+              "17 8 * * *") MODE=nba_grade ;;
               *) MODE=picks ;;
             esac
           fi
@@ -83,6 +93,7 @@ jobs:
             engine/euroleague.db
             engine/basketball.db
             engine/dbs
+            engine/nba/nba.db
           key: data-${{ github.run_id }}
 
       - name: Commit results (triggers the Vercel rebuild)

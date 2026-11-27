@@ -1,6 +1,6 @@
 // Last-10-games bars against the line (oldest left). Green = this pick would have won, red = lost.
 export default function LogChart({ logs, line, sideName, projection }) {
-  if (!logs?.length) return <p className="dim">No EuroLeague games yet this season.</p>;
+  if (!logs?.length) return <p className="dim">No games yet this season.</p>;
   const g = [...logs].reverse(), W = 380, G = 70, H = 150, top = 14, bottom = 30, n = g.length;
   const max = Math.max(line * 1.6, projection || 0, ...g.map((x) => x.value), 1);
   const y = (v) => top + (H - top - bottom) * (1 - v / max), bw = ((W - G) / n) * 0.62, x = (i) => ((W - G) / n) * i + ((W - G) / n - bw) / 2;

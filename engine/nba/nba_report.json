@@ -1,0 +1,110 @@
+{
+ "rows": {
+  "train": 208924,
+  "valid": 28198,
+  "test": 34591
+ },
+ "minutes": {
+  "baseline last-5 average": {
+   "MAE": 5.628,
+   "within_3min": 0.38
+  },
+  "model without schedule": {
+   "MAE": 4.619,
+   "within_3min": 0.43
+  },
+  "model with schedule": {
+   "MAE": 4.617,
+   "within_3min": 0.43
+  },
+  "chosen": "without schedule",
+  "10-90 coverage": 0.792
+ },
+ "minutes_segments": {
+  "back-to-back": {
+   "n": 7577,
+   "MAE without": 4.832,
+   "MAE with": 4.824
+  },
+  "3+ games in 4 days... (g_last4>=2)": {
+   "n": 22429,
+   "MAE without": 4.589,
+   "MAE with": 4.586
+  },
+  "travel > 2000 km": {
+   "n": 3294,
+   "MAE without": 4.606,
+   "MAE with": 4.622
+  },
+  "big expected margin (>10)": {
+   "n": 13541,
+   "MAE without": 4.558,
+   "MAE with": 4.555
+  },
+  "teammates missing >= 25 min": {
+   "n": 8581,
+   "MAE without": 5.105,
+   "MAE with": 5.097
+  }
+ },
+ "stat_given_minutes": {
+  "Points": {
+   "MAE model": 3.662,
+   "MAE naive": 3.743
+  },
+  "Rebounds": {
+   "MAE model": 1.58,
+   "MAE naive": 1.592
+  },
+  "Assists": {
+   "MAE model": 1.195,
+   "MAE naive": 1.21
+  },
+  "3-pointers made": {
+   "MAE model": 0.808,
+   "MAE naive": 0.809
+  }
+ },
+ "dispersion_k": {
+  "Points": 11.48,
+  "Rebounds": 60.85,
+  "Assists": 50.32,
+  "3-pointers made": 36.02
+ },
+ "probabilities": {
+  "Points": {
+   "n": 34591,
+   "Brier model": 0.2321,
+   "Brier naive": 0.2583
+  },
+  "Rebounds": {
+   "n": 34591,
+   "Brier model": 0.2325,
+   "Brier naive": 0.2569
+  },
+  "Assists": {
+   "n": 34591,
+   "Brier model": 0.2314,
+   "Brier naive": 0.2514
+  },
+  "3-pointers made": {
+   "n": 34591,
+   "Brier model": 0.2069,
+   "Brier naive": 0.2182
+  }
+ },
+ "minutes_top_features": {
+  "teammate_min_share": 0.504,
+  "min_avg10": 0.103,
+  "season_min_avg": 0.095,
+  "min_last1": 0.064,
+  "min_avg5": 0.052,
+  "min_std5": 0.023,
+  "min_avg3": 0.023,
+  "team_min_available": 0.021,
+  "last_start": 0.016,
+  "prev_season_min": 0.016,
+  "missing_min": 0.012,
+  "net10": 0.01
+ }
+}

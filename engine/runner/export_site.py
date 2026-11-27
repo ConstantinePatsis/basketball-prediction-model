@@ -108,7 +108,7 @@ def reasons(l, logs, mins, allowed, ranks, nteams, out_mates, team_name):
         pms = [x["value"] / x["min"] for x in logs if x["min"] > 0]
         if pm and pms and len(pms) >= 6:
             a, s_ = np.mean(pm), np.mean(pms)
-            if abs(a / s_ - 1) >= 0.15:
+            if s_ > 0 and abs(a / s_ - 1) >= 0.15:
                 r.append(f"Per-minute production is {'up' if a > s_ else 'down'} lately: {a * 30:.1f} per 30 minutes "
                          f"over the last 5 games, against {s_ * 30:.1f} for the season.")
     opp = l["opp"]

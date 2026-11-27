@@ -1,7 +1,8 @@
 import "./globals.css";
 import Link from "next/link";
 import { updated, stamp } from "@/lib";
-export const metadata = { title: "EuroLeague props model", robots: { index: false, follow: false } };
+import Nav from "@/components/Nav";
+export const metadata = { title: "Player props model", robots: { index: false, follow: false } };
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -12,8 +13,8 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <header className="bar-top"><div className="in">
-          <Link href="/" className="logo">EuroLeague <b>props</b></Link>
-          <nav><Link href="/">Today</Link><Link href="/results">Results</Link><Link href="/backtest">Backtest</Link><Link href="/about">How it works</Link></nav>
+          <Link href="/" className="logo">Props <b>model</b></Link>
+          <Nav />
           <span className="stamp">Updated {stamp(updated)}</span>
         </div></header>
         <main>{children}</main>

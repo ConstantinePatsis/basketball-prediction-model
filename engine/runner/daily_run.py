@@ -2,6 +2,7 @@
 
   python3 daily_run.py picks   # morning / pre-game: update data, read injuries, pull Stoiximan lines, run model, log picks
   python3 daily_run.py grade   # night: update EuroLeague box scores, grade the paper log
+  python3 daily_run.py nba_picks / nba_grade   # the same for the NBA (ESPN data, top 10 per game)
 Both end by exporting the website's JSON files.
 
 Uses 1 OddsPapi request per 'picks' run (odds-by-tournaments), only on days with EuroLeague games.
@@ -98,6 +99,38 @@ def picks():
     return True
 
 
+NBA = f"{BASE}/nba"
+
+
+def nba_picks():
+    """NBA: 1 OddsPapi request. Games tipping off in the next 20 hours."""
+    now = datetime.now(timezone.utc)
+    r = requests.get("https://api.oddspapi.io/v4/odds-by-tournaments",
+                     params={"apiKey": key(), "tournamentIds": 132, "bookmaker": "stoiximan"}, timeout=120)
+    r.raise_for_status()
+    soon = [f for f in r.json() if now < pd.Timestamp(f["startTime"]) < now + timedelta(hours=20)]
+    if soon:   # one NBA night at a time (a team can't appear twice in the feature build)
+        night = lambda f: (pd.Timestamp(f["startTime"]) - timedelta(hours=10)).date()
+        first = min(night(f) for f in soon)
+        soon = [f for f in soon if night(f) == first]
+    print(f"{len(soon)} NBA games in the next 20 hours with Stoiximan odds", flush=True)
+    if not soon:
+        return False
+    json.dump(soon, open(f"{ODDS}/nba_live_today.json", "w"))
+    sh([sys.executable, "collect_nba.py", "2026", "2026"], NBA)
+    if not sh([sys.executable, "predict_nba.py", f"{ODDS}/nba_live_today.json"], NBA):
+        return False
+    scored = sorted(f for f in os.listdir(RUN) if f.startswith("nba_scored_"))
+    if scored:
+        sh([sys.executable, "nba_paper.py", "record", f"{RUN}/{scored[-1]}"], NBA)
+    return True
+
+
+def nba_grade():
+    sh([sys.executable, "collect_nba.py", "2026", "2026"], NBA)
+    sh([sys.executable, "nba_paper.py", "grade"], NBA)
+
+
 def grade():
     sh([sys.executable, "collect_euroleague.py", "--start", "2026", "--end", "2026"], BASE)
     sh([sys.executable, "paper_trade.py", "grade"], RUN)
@@ -109,4 +142,9 @@ if __name__ == "__main__":
         picks()
     elif mode == "grade":
         grade()
+    elif mode == "nba_picks":
+        nba_picks()
+    elif mode == "nba_grade":
+        nba_grade()
     sh([sys.executable, "export_site.py"], RUN)
+    sh([sys.executable, "export_nba.py"], NBA)

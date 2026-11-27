@@ -12,3 +12,7 @@ engine/odds/hist/
 web/node_modules/
 web/.next/
 .vercel
+engine/nba/*.db
+engine/nba/*.parquet
+engine/odds/nba_hist/
+engine/odds/nba_live_today.json
